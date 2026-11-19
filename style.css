@@ -1,0 +1,192 @@
+:root {
+  color-scheme: dark;
+  font-family: Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#game {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #10151a;
+}
+
+canvas {
+  display: block;
+}
+
+#hud {
+  position: fixed;
+  z-index: 2;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.hud-card {
+  min-width: 90px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(8, 12, 16, 0.72);
+  text-transform: uppercase;
+}
+
+.hud-card span,
+.hud-card strong {
+  display: block;
+}
+
+.hud-card span {
+  color: #a7b3b8;
+  font-size: 11px;
+}
+
+.hud-card strong {
+  margin-top: 3px;
+  color: #f0c674;
+  font-size: 18px;
+}
+
+#crosshair {
+  position: fixed;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+#crosshair::before,
+#crosshair::after {
+  position: absolute;
+  content: "";
+  background: #fff;
+  box-shadow: 0 0 3px #000;
+}
+
+#crosshair::before {
+  top: 8px;
+  left: 0;
+  width: 18px;
+  height: 2px;
+}
+
+#crosshair::after {
+  top: 0;
+  left: 8px;
+  width: 2px;
+  height: 18px;
+}
+
+#message {
+  position: fixed;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  width: min(90%, 520px);
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(10, 15, 19, 0.9);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+#message.hidden {
+  display: none;
+}
+
+#message h1 {
+  margin: 0 0 12px;
+  color: #f0c674;
+  letter-spacing: 0.12em;
+}
+
+#message p {
+  margin: 0 0 24px;
+  color: #d7dddf;
+}
+
+button {
+  padding: 11px 26px;
+  border: 0;
+  border-radius: 3px;
+  background: #c58d32;
+  color: #17120a;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #e0aa4a;
+}
+
+#hit-marker {
+  position: fixed;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  color: #f0c674;
+  font-size: 28px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+#hit-marker.visible {
+  animation: hit 180ms ease-out;
+}
+
+#damage-flash {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  background: rgba(160, 20, 15, 0.35);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#damage-flash.visible {
+  animation: damage 220ms ease-out;
+}
+
+@keyframes hit {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes damage {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 620px) {
+  #hud {
+    top: 10px;
+    left: 10px;
+    gap: 4px;
+  }
+
+  .hud-card {
+    min-width: 68px;
+    padding: 6px;
+  }
+
+  .hud-card strong {
+    font-size: 14px;
+  }
+}
